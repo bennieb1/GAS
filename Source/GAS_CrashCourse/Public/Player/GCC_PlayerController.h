@@ -24,8 +24,7 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category="Crash|Input")
 	TArray<TObjectPtr<UInputMappingContext>> InputMappingContexts;
 	
-	UPROPERTY(EditDefaultsOnly, Category="Crash|Input")
-	TArray<TObjectPtr<UInputMappingContext>> AbilityInputMappingContexts;
+
 	
 	UPROPERTY(EditDefaultsOnly, Category="Crash|Input")
 	TObjectPtr<UInputAction> JumpAction;
@@ -43,6 +42,6 @@ private:
 	void StopJumping();
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
-	void Primary();
+	// void Primary();
 	
 };

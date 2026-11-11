@@ -22,10 +22,6 @@ void AGCC_PlayerController::SetupInputComponent()
 			
 	}
 	
-	for (UInputMappingContext* Context : AbilityInputMappingContexts)
-	{
-		InPutSubsystem->AddMappingContext(Context, 1);
-	}
 
 	UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
 	if (!IsValid(EnhancedInputComponent)) return;
@@ -34,7 +30,7 @@ void AGCC_PlayerController::SetupInputComponent()
 	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ThisClass::StopJumping);
 	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::Move);
 	EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ThisClass::Look);
-	EnhancedInputComponent->BindAction(PrimaryAbilityAction, ETriggerEvent::Started, this, &ThisClass::Primary);
+	// EnhancedInputComponent->BindAction(PrimaryAbilityAction, ETriggerEvent::Started, this, &ThisClass::Primary);
 
 }
 
@@ -82,9 +78,9 @@ void AGCC_PlayerController::Look(const FInputActionValue& Value)
 	
 }
 
-void AGCC_PlayerController::Primary()
-{
-	
-	UE_LOG(LogTemp, Log, TEXT("Primary Ability Pressed"));
-	
-}
+// void AGCC_PlayerController::Primary()
+// {
+// 	
+// 	UE_LOG(LogTemp, Log, TEXT("Primary Ability Pressed"));
+// 	
+// }

@@ -54,18 +54,25 @@ void AGCC_PlayerCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 	
-	if (IsValid(GetAbilitySystemComponent())) return;
-	
-	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(), this);
-	
+	UAbilitySystemComponent* ASC = GetAbilitySystemComponent();
+	if (!IsValid(ASC)) return;
+    
+	ASC->InitAbilityActorInfo(GetPlayerState(), this);
+
+	if (HasAuthority())
+	{
+		GiveStartupAbilities();
+	}
 }
 
 void AGCC_PlayerCharacter::OnRep_PlayerState()
 {
 	Super::OnRep_PlayerState();
 	
-	if (IsValid(GetAbilitySystemComponent())) return;
+	UAbilitySystemComponent* ASC = GetAbilitySystemComponent();
+	if (!IsValid(ASC)) return;
+    
+	ASC->InitAbilityActorInfo(GetPlayerState(), this);
 	
-	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(), this);
 }
 
