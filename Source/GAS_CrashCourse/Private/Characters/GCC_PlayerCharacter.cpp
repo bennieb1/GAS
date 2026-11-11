@@ -2,10 +2,13 @@
 
 
 #include "GAS_CrashCourse/Public/Characters/GCC_PlayerCharacter.h"
+
+#include "AbilitySystemComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Player/GCC_PlayerState.h"
 
 
 AGCC_PlayerCharacter::AGCC_PlayerCharacter()
@@ -37,5 +40,32 @@ AGCC_PlayerCharacter::AGCC_PlayerCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCamera->bUsePawnControlRotation = false;
 	
+}
+
+UAbilitySystemComponent* AGCC_PlayerCharacter::GetAbilitySystemComponent() const
+{
+	AGCC_PlayerState* GCCPlayerState  = Cast<AGCC_PlayerState>(GetPlayerState());
+	if (!IsValid(GCCPlayerState )) return nullptr;
+	
+	return GCCPlayerState ->GetAbilitySystemComponent();
+}
+
+void AGCC_PlayerCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	
+	if (IsValid(GetAbilitySystemComponent())) return;
+	
+	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(), this);
+	
+}
+
+void AGCC_PlayerCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+	
+	if (IsValid(GetAbilitySystemComponent())) return;
+	
+	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(), this);
 }
 
