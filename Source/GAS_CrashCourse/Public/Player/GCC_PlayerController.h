@@ -38,10 +38,19 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category="Crash|Input")
 	TObjectPtr<UInputAction> PrimaryAbilityAction;
 	
+	UPROPERTY(EditDefaultsOnly, Category="Crash|Input")
+	TObjectPtr<UInputAction> SecondaryAbilityAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Crash|Input")
+	TObjectPtr<UInputAction> TertiaryAbilityAction;
+	
 	void Jump();
 	void StopJumping();
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
-	// void Primary();
+	void Primary();
+	void Secondary();
+	void Tertiary();
+	void ActivateAbility(const FGameplayTag& AbilityTag) const;
 	
 };
